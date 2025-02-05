@@ -29,8 +29,8 @@ LocalHost: ```8000```
   * Offline: ```ERR_CONNECT_REFUSED``` or ```404 Not Found``` or ```This site can't be reached```
 
 **Email Service**
-* VPS Server: ```http://VPS-IP/portfolio-api/public/mail.php```
-* LocalHost: ``` localhost:8000/mail.php```
+* VPS Server: ```http://VPS-IP/portfolio-api/public/email.php```
+* LocalHost: ``` localhost:8000/email.php```
 * **Response**
   * Online: ```{"error":"Invalid request method."}```
   * Offline: ```ERR_CONNECT_REFUSED``` or ```404 Not Found``` or ```This site can't be reached```
