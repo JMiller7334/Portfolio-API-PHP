@@ -5,11 +5,14 @@ directs them to my VPS IP where my PHP services can finish handling them.
 
 *  **⚠ IMPORTANT: See Configuration for information on pointing this API to an IP.**
 
-## Technologies Used
+### Technologies Used
 * JavaScript
 * Node.js
 * Express.js
 * Axios
+
+### Related Projects:
+[Portfolio API PHP](https://github.com/JMiller7334/Portfolio-API-PHP)
 
 ## Base URL
 ```http://jacobjmiller.com```
