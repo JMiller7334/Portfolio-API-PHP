@@ -1,6 +1,6 @@
 # Portfolio-API-PHP
 Backend PHP I use on my VPS for sending emails. This project works alongside my Portfolio-API which acts
-as an entry point for this to keep sensitive information such as email app passwords, VPS IP Address, etc from being easily exposed and off of the client side.
+as an entry point for this.
 
 ## Technologies Used:
 * PHP
