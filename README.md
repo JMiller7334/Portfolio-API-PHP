@@ -1,6 +1,5 @@
 # Portfolio-API-PHP
-Backend PHP I use on my VPS for sending emails. This project works alongside my Portfolio-API which acts
-as an entry point for this.
+Backend PHP I use with my portfolio website for sending emails. This project works alongside my Portfolio-API.
 
 ## Technologies Used:
 * PHP
@@ -76,3 +75,6 @@ curl -X POST http://VPS-IP/portfolio-api/public/email.php \ -H "Content-Type: ap
 
 ## Related Projects:
 * [Portfolio API](https://github.com/JMiller7334/portfolio-api)
+
+## Links:
+* [JacobJMiller.com](https://JacobJMiller.com)
