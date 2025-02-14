@@ -5,6 +5,7 @@ as an entry point for this.
 ## Technologies Used:
 * PHP
 * PHPMailer
+* Composer
 
 ## Local Testing:
 Run command via terminal: 
