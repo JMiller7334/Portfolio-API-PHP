@@ -32,8 +32,74 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+//RATE LIMITING
+
+//temp dir clean up
+$files = glob(sys_get_temp_dir() . '/rate_limit_*');
+$expiry = 3600; // 1 hour
+$now = time();
+
+foreach ($files as $file) {
+    if (filemtime($file) < $now - $expiry) {
+        @unlink($file);
+    }
+}
+
+//rate limiting
+$ip = $_SERVER['REMOTE_ADDR'];
+if (empty($ip)) {
+    http_response_code(400);
+    echo json_encode(["error" => "Unable to determine client IP."]);
+    exit;
+}
+
+$rateLimitFile = sys_get_temp_dir() . "/rate_limit_" . md5($ip);
+$limit = 3;   //max requests allowed
+$window = 60; //time window in seconds
+
+$fp = fopen($rateLimitFile, 'c+'); //open or create file
+if (!$fp) {
+    http_response_code(500);
+    echo json_encode(["error" => "Internal server error, fopen failure."]);
+    exit;
+}
+
+if (flock($fp, LOCK_EX)) {///ock file for exclusive access
+    rewind($fp);
+    $contents = stream_get_contents($fp);
+    $requests = json_decode($contents, true) ?? [];
+
+    //remove timestamps outside the current window
+    $requests = array_filter($requests, fn($timestamp) => $timestamp > $now - $window);
+
+    if (count($requests) >= $limit) {
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        http_response_code(429);
+        echo json_encode(["error" => "Too many requests. Please wait and try again later."]);
+        exit;
+    }
+
+    //add current request timestamp
+    $requests[] = $now;
+
+    //save updated request list
+    ftruncate($fp, 0);
+    rewind($fp);
+    fwrite($fp, json_encode($requests));
+    fflush($fp);
+    flock($fp, LOCK_UN);
+}
+fclose($fp);
+//
+
 // Get POST request data
 $data = json_decode(file_get_contents("php://input"), true);
+if (!is_array($data)) { //validate json
+    echo json_encode(["error" => "Invalid JSON payload."]);
+    exit;
+}
+
 
 $name = htmlspecialchars(trim($data['name'] ?? ''));
 $email = filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL);
