@@ -46,11 +46,17 @@ LocalHost: ```8000```
 **Request Example (cURL)**
 * **LocalHost:**
 ``` sh
-curl -X POST http://localhost:8000/email.php \ -H "Content-Type: application/json" \ -d '{"name":"John Doe","email":"johndoe@example.com","message":"Hello!"}'
+curl -X POST http://localhost:8000/email.php \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","email":"johndoe@example.com","message":"Hello!"}'
+
 ```
 * **Production:**
 ``` sh
-curl -X POST http://DOMAIN/portfolio-api/public/email.php \ -H "Content-Type: application/json" \ -d '{"name":"John Doe","email":"johndoe@example.com","message":"Hello!"}'
+curl -i -X POST https://jacobjmiller.com/portfolio-api/public/email.php \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","email":"johndoe@example.com","message":"Hello!"}'
+
 ```
 
 **Request Body (JSON)**
