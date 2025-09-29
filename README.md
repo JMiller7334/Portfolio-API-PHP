@@ -53,7 +53,7 @@ curl -X POST http://localhost:8000/email.php \
 ```
 * **Production:**
 ``` sh
-curl -i -X POST https://jacobjmiller.com/portfolio-api/public/email.php \
+curl -i -X POST https://www.jacobjmiller.com/portfolio-api/public/email.php \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","email":"johndoe@example.com","message":"Hello!"}'
 
